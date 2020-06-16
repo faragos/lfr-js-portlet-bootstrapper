@@ -1,8 +1,8 @@
 var fs = require('fs')
 var preparePage = require('./preparePage')
-var request = require('request')
+const fetch = require('node-fetch')
 
-module.exports = function (configPath, basePath) {
+module.exports = async function (configPath, basePath) {
   const folderName = basePath + '/.webpack/'
 
   let config = getConfig(configPath, basePath)
@@ -15,9 +15,8 @@ module.exports = function (configPath, basePath) {
   }
 
   try {
-    downloadPage(config).then(() => {
-
-    })
+    await downloadPage(config)
+    console.info('Downloading page finished')
   } catch (err) {
     console.error(err)
   }
@@ -32,11 +31,9 @@ module.exports.getPropsElements = function () {
 }
 
 async function downloadPage (options) {
-  request({
-    uri: options.url,
-  }, function (error, response, body) {
-    preparePage(options, body)
-  })
+  let res = await fetch(options.url)
+  let body = await res.text()
+  return preparePage(options, body)
 }
 
 function getConfig (configPath, basePath) {
