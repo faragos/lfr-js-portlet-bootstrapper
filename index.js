@@ -5,18 +5,7 @@ var request = require('request')
 module.exports = function (configPath, basePath) {
   const folderName = basePath + '/.webpack/'
 
-  if (!configPath) {
-    configPath = 'liferay.portlet.config.js'
-  }
-
-  let fullConfigPath = basePath + '/' + configPath
-
-  if (!fs.existsSync(fullConfigPath)) {
-    console.info(configPath + ' not Found')
-    console.info('using config from ./' + configPath)
-  }
-
-  let config = require(fullConfigPath)
+  let config = getConfig(configPath, basePath)
 
   config.url = config.protocol + '://' + config.host + ':' + config.originPort
   config.directory = folderName
@@ -50,8 +39,21 @@ async function downloadPage (options) {
   })
 }
 
+function getConfig (configPath, basePath) {
+  if (!configPath) {
+    configPath = 'liferay.portlet.config.js'
+  }
 
+  let fullConfigPath = basePath + '/' + configPath
 
+  if (!fs.existsSync(fullConfigPath)) {
+    console.info(fullConfigPath + ' not Found')
+    console.info('using config from ./' + configPath)
+    return require(__dirname + '/' + configPath)
+  }
+
+  return require(fullConfigPath)
+}
 
 
 

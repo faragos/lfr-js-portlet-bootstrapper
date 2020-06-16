@@ -1,6 +1,6 @@
 {
   "name": "@clavis/lfr-js-portlet-bootstrapper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Parses a Liferay Page and returns all JS Portlets ID's and its HTML",
   "main": "index.js",
   "scripts": {
