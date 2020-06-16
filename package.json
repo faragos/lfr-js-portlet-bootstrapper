@@ -1,5 +1,5 @@
 {
-  "name": "lfr-js-portlet-bootstrapper",
+  "name": "@clavis/lfr-js-portlet-bootstrapper",
   "version": "0.0.1",
   "description": "Parses a Liferay Page and returns all JS Portlets ID's and its HTML",
   "main": "index.js",
@@ -17,5 +17,18 @@
   },
   "author": "Marco Endres",
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faragos/lfr-js-portlet-bootstrapper.git"
+  },
+  "keywords": [
+    "lfr",
+    "liferay",
+    "js"
+  ],
+  "bugs": {
+    "url": "https://github.com/faragos/lfr-js-portlet-bootstrapper/issues"
+  },
+  "homepage": "https://github.com/faragos/lfr-js-portlet-bootstrapper#readme"
 }

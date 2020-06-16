@@ -1,53 +1,53 @@
-var fs = require('fs');
-var preparePage = require("./preparePage")
-var request = require("request");
+var fs = require('fs')
+var preparePage = require('./preparePage')
+var request = require('request')
 
 module.exports = function (configPath, basePath) {
-    const folderName = basePath + '/.webpack/';
+  const folderName = basePath + '/.webpack/'
 
-    if(!configPath) {
-      configPath = 'liferay.portlet.config.js'
-    }
+  if (!configPath) {
+    configPath = 'liferay.portlet.config.js'
+  }
 
-    let fullConfigPath = basePath + '/' + configPath
+  let fullConfigPath = basePath + '/' + configPath
 
-    if(!fs.existsSync(fullConfigPath)) {
-      console.error(configPath + ' not Found')
-      return
-    }
+  if (!fs.existsSync(fullConfigPath)) {
+    console.info(configPath + ' not Found')
+    console.info('using config from ./' + configPath)
+  }
 
-    let config = require(fullConfigPath);
+  let config = require(fullConfigPath)
 
-    config.url = config.protocol + '://' + config.host + ':' + config.originPort
-    config.directory = folderName
+  config.url = config.protocol + '://' + config.host + ':' + config.originPort
+  config.directory = folderName
 
-    if (!fs.existsSync(folderName)){
-      fs.mkdirSync(folderName);
-    }
+  if (!fs.existsSync(folderName)) {
+    fs.mkdirSync(folderName)
+  }
 
-    try {
-      downloadPage(config).then(() => {
+  try {
+    downloadPage(config).then(() => {
 
-      })
-    } catch (err) {
-        console.error(err)
-    }
+    })
+  } catch (err) {
+    console.error(err)
+  }
 }
 
-module.exports.getIndexPath = function() {
-  return __dirname + '/.webpack/index.html';
+module.exports.getIndexPath = function () {
+  return __dirname + '/.webpack/index.html'
 }
 
-module.exports.getPropsElements = function() {
-  return require(__dirname + '/.webpack/props.json');
+module.exports.getPropsElements = function () {
+  return require(__dirname + '/.webpack/parameters.json')
 }
 
 async function downloadPage (options) {
   request({
     uri: options.url,
-  }, function(error, response, body) {
-    preparePage(options, body);
-  });
+  }, function (error, response, body) {
+    preparePage(options, body)
+  })
 }
 
 
