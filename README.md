@@ -53,6 +53,7 @@ module.exports = {
   }
 }
 ````
+But there is also the possiblity to only give the missing values and your and the default config get merged
 
 ## How to update your index.html
 ``npx liferay-js-portlet-bootstrapper``
