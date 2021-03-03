@@ -1,6 +1,6 @@
 # Idea
 
-The idea behind this tool is that you can download a Liferay page with JS portlets and remvoing the initialisation. \
+The idea behind this tool is that you can download a Liferay page with JS portlets and remvoing the initialization. \
 It prepares a Liferay page for webpack.
 
 ``npx lfr-js-portlet-bootstrapper``
