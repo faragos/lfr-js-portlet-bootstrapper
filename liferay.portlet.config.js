@@ -3,6 +3,7 @@ module.exports = {
   host: 'localhost',
   originPort: 8080,
   port: 3000,
+  url: '/page',
   remove: {
     script: [],
     selector: '[id^=js-portlet-] + script'
@@ -13,5 +14,7 @@ module.exports = {
   },
   sources: {
     js: '/src/index.js'
-  }
+  },
+  user: 'test',
+  password: 'password'
 }
