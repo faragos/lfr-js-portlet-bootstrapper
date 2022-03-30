@@ -7,7 +7,7 @@ module.exports = async function (configPath, basePath) {
 
   let config = getConfig(configPath, basePath)
 
-  config.url = config.protocol + '://' + config.host + ':' + config.originPort
+  config.url = config.protocol + '://' + config.host + ':' + config.originPort + (config.url ? config.url : '')
   config.directory = folderName
 
   if (!fs.existsSync(folderName)) {
@@ -31,7 +31,11 @@ module.exports.getPropsElements = function () {
 }
 
 async function downloadPage (options) {
-  let res = await fetch(options.url)
+  let headers = {}
+  if (options.user && options.password) {
+    headers = { 'Authorization': `Basic ${Buffer.from(options.user + ':' + options.password).toString('base64')}` }
+  }
+  let res = await fetch(options.url, { headers })
   let body = await res.text()
   return preparePage(options, body)
 }
